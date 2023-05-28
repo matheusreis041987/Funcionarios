@@ -2,6 +2,7 @@ package com.example.funcionarios1.service.impl;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
@@ -39,7 +40,8 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 		
 		// conferir se o CPF está ok.
 		/*if (! funcionario.getCpf().matches("[^0-9]+")) {
-			return funcionario;
+			
+			return null;
 		}*/
 	
 				
@@ -89,12 +91,13 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 
 	@Override
 	@Transactional
-	public Integer buscarMaior(Funcionario funcionario) {
+	public Optional<Funcionario> consultarPorId(Long id) {
+				
 		
-		
-		
-		return null;
+		return repository.findById(id);
 	}
+
+	
 	
 	
 
