@@ -1,7 +1,9 @@
 package com.example.funcionarios1.api.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -66,4 +68,12 @@ public class FuncionarioController {
 		}
 		
 	}
+	
+	@PutMapping("/atualizar-produto/{id}") // as chaves são para indicar que o parâmetro id será variável
+	public ResponseEntity atualizar(@PathVariable("id") Long id, @RequestBody FuncionarioDto dto) {
+		
+		
+		return null;
+	}
+	
 }

@@ -13,5 +13,7 @@ public interface FuncionarioService {
 	 void deletar(Funcionario funcionario);
 	
 	 List<Funcionario> buscar(Funcionario funcionario);
+	 
+	 Integer buscarMaior(Funcionario funcionario);
 	
 }

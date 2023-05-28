@@ -31,9 +31,13 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 		funcionario.setEmail(nomeSeparado[0].toLowerCase() + "." + nomeSeparado[nomeSeparado.length-1].toLowerCase() 
 				+ funcionario.getCpf().substring(0,5) + "@ldwpuc.com.br" );
 		
+		
+		//****MELHORIA*** ir no Banco de dados trazer a maior matrícula e acrescentar 1
+		// hoje quando o sistema é fechado ele não consegue buscar as informações anteriores.
+		
 		funcionario.setMatricula(++matriculap);
-		
-		
+	
+				
 		return repository.save(funcionario);
 	}
 
@@ -77,5 +81,16 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 		
 		return repository.findAll(example);
 	}
+
+	@Override
+	@Transactional
+	public Integer buscarMaior(Funcionario funcionario) {
+		
+		
+		
+		return null;
+	}
+	
+	
 
 }
