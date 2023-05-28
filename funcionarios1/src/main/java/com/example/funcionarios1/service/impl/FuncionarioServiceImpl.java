@@ -36,6 +36,11 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 		// hoje quando o sistema é fechado ele não consegue buscar as informações anteriores.
 		
 		funcionario.setMatricula(++matriculap);
+		
+		// conferir se o CPF está ok.
+		/*if (! funcionario.getCpf().matches("[^0-9]+")) {
+			return funcionario;
+		}*/
 	
 				
 		return repository.save(funcionario);
