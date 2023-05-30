@@ -5,9 +5,11 @@ import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.data.domain.Example;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.funcionarios1.api.controller.FuncionarioController;
 import com.example.funcionarios1.model.entity.Funcionario;
 import com.example.funcionarios1.model.repository.FuncionarioRepository;
 import com.example.funcionarios1.service.FuncionarioService;
@@ -37,6 +39,8 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 		// hoje quando o sistema é fechado ele não consegue buscar as informações anteriores.
 		
 		funcionario.setMatricula(++matriculap);
+		
+		
 		
 		// conferir se o CPF está ok.
 		/*if (! funcionario.getCpf().matches("[^0-9]+")) {

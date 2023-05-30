@@ -1,13 +1,17 @@
 package com.example.funcionarios1.api.controller;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.funcionarios1.api.dto.FuncionarioDto;
@@ -108,6 +112,54 @@ public class FuncionarioController {
 		
 	}
 	
+	@GetMapping("/buscar")
+	public ResponseEntity buscar(
+			@RequestParam(value = "nome", required = false) String nome,
+			@RequestParam(value = "cpf", required = false) String cpf,
+			@RequestParam(value = "cargo", required = false) String cargo,
+			@RequestParam(value = "especializacao", required = false) String especializacao,
+			@RequestParam(value = "endereco", required = false) String endereco,
+			@RequestParam(value = "salario", required = false) Double salario,
+			@RequestParam(value = "ehDefiente", required = false) boolean ehDefiente,
+			@RequestParam(value = "email", required = false) String email,
+			@RequestParam(value = "matricula",required = false ) Integer matricula
+			) {
+		
+		Funcionario funcionarioFiltro = new Funcionario();
+		
+		funcionarioFiltro.setNome(nome);
+		funcionarioFiltro.setCpf(cpf);
+		funcionarioFiltro.setCargo(cargo);
+		funcionarioFiltro.setEspecializacao(especializacao);
+		funcionarioFiltro.setEndereco(endereco);
+		funcionarioFiltro.setSalario(salario);
+		funcionarioFiltro.setEhDefiente(ehDefiente);
+		funcionarioFiltro.setEmail(email);
+		funcionarioFiltro.setMatricula(matricula);
+		
+		List<Funcionario> funcionarios = service.buscar(funcionarioFiltro);
+		
+		
+		return ResponseEntity.ok(funcionarios);
+	}
 	
+	@GetMapping("buscar-matricula")
+	public ResponseEntity buscarMatricula(
+			@RequestParam(value = "matricula",required = false ) Integer matricula
+			) {
+		Funcionario funcionarioMatricula = new Funcionario();
+		
+		funcionarioMatricula.setMatricula(matricula);
 	
+		
+		List<Funcionario> matriculas = service.buscar(funcionarioMatricula);
+		
+				
+		Funcionario x = matriculas.get(matriculas.size()-1);
+		
+		
+		
+		
+		return ResponseEntity.ok( x);
+	}
 }
