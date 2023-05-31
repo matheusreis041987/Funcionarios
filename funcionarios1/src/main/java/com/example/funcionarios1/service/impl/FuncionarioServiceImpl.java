@@ -38,7 +38,9 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 		//****MELHORIA*** ir no Banco de dados trazer a maior matrícula e acrescentar 1
 		// hoje quando o sistema é fechado ele não consegue buscar as informações anteriores.
 		
-		funcionario.setMatricula(++matriculap);
+		Long x = funcionario.getId();
+		
+		funcionario.setMatricula((int) (matriculap + x));
 		
 		
 		
