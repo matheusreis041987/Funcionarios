@@ -8,6 +8,8 @@ import org.springframework.data.domain.Example;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.funcionarios1.api.controller.FuncionarioController;
 import com.example.funcionarios1.model.entity.Funcionario;
@@ -18,7 +20,8 @@ import com.example.funcionarios1.service.FuncionarioService;
 public class FuncionarioServiceImpl implements FuncionarioService {
 
 	FuncionarioRepository repository;
-	private static int matriculap = 21103208;
+	private static Integer matriculap = 21103208;
+	FuncionarioService service;
 	
 	
 	public FuncionarioServiceImpl(FuncionarioRepository fun) {
@@ -38,9 +41,14 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 		//****MELHORIA*** ir no Banco de dados trazer a maior matrícula e acrescentar 1
 		// hoje quando o sistema é fechado ele não consegue buscar as informações anteriores.
 		
-		Long x = funcionario.getId();
+		// x = funcionario.getId();
 		
-		funcionario.setMatricula((int) (matriculap + x));
+		//Integer y = this.buscarMatriculaMaior(0).getMatricula();
+		
+		
+		//funcionario.setMatricula(y++);
+		
+		funcionario.setMatricula(++matriculap);
 		
 		
 		
@@ -104,7 +112,24 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 	}
 
 	
+	@GetMapping("buscar-matricula")
+	public Funcionario buscarMatriculaMaior(
+			@RequestParam(value = "matricula",required = false ) Integer matricula
+			) {
+		Funcionario funcionarioMatricula = new Funcionario();
+		
+		funcionarioMatricula.setMatricula(matricula);
 	
+		
+		List<Funcionario> matriculas = service.buscar(funcionarioMatricula);
+		
+				
+		Funcionario x = matriculas.get(matriculas.size()-1);
+		
+				
+		
+		return x;
+	}
 	
 
 }
